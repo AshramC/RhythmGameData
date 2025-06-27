@@ -26,7 +26,7 @@ public class UIAnimationObject : MonoBehaviour
     public bool enableDebugLog = false;
     
     // DOTween控制器
-    private DOTweenController dotweenController;
+    // private DOTweenController dotweenController;
     
     /// <summary>
     /// 是否正在播放动画（只读属性）
@@ -45,7 +45,7 @@ public class UIAnimationObject : MonoBehaviour
         // 初始化DOTween控制器
         if (rectTransform != null)
         {
-            dotweenController = new DOTweenController(rectTransform);
+            // dotweenController = new DOTweenController(rectTransform);
             LogDebug("DOTween控制器初始化完成");
         }
         else
@@ -91,19 +91,19 @@ public class UIAnimationObject : MonoBehaviour
         }
         
         // 播放DOTween动画（如果启用）
-        if (dotweenData.useMove && dotweenController != null)
-        {
-            dotweenController.PlayDOTweenAnimation(dotweenData, () => {
-                isPlaying = false;
-                OnAnimationComplete();
-                LogDebug("DOTween动画完成");
-            });
-        }
-        else
-        {
+        // if (dotweenData.useMove && dotweenController != null)
+        // {
+        //     dotweenController.PlayDOTweenAnimation(dotweenData, () => {
+        //         isPlaying = false;
+        //         OnAnimationComplete();
+        //         LogDebug("DOTween动画完成");
+        //     });
+        // }
+        // else
+        // {
             // 如果没有DOTween动画，延迟标记完成
             StartCoroutine(DelayedComplete(GetAnimatorDuration()));
-        }
+        // }
     }
     
     /// <summary>
@@ -116,7 +116,7 @@ public class UIAnimationObject : MonoBehaviour
         isPlaying = false;
         
         // 停止DOTween动画
-        dotweenController?.StopAnimation();
+        // dotweenController?.StopAnimation();
         
         // 停止延迟完成协程
         StopAllCoroutines();
@@ -132,7 +132,7 @@ public class UIAnimationObject : MonoBehaviour
         StopAnimation();
         
         // 重置DOTween位置
-        dotweenController?.ResetToInitial();
+        // dotweenController?.ResetToInitial();
         
         // 重置Animator状态
         if (animator != null)
@@ -156,10 +156,10 @@ public class UIAnimationObject : MonoBehaviour
     {
         string status = $"ID: {objectId} | 播放中: {isPlaying}";
         
-        if (dotweenController != null)
-        {
-            status += $" | DOTween: {(dotweenController.IsPlaying ? "播放中" : "停止")}";
-        }
+        // if (dotweenController != null)
+        // {
+        //     status += $" | DOTween: {(dotweenController.IsPlaying ? "播放中" : "停止")}";
+        // }
         
         if (animator != null)
         {
@@ -214,7 +214,7 @@ public class UIAnimationObject : MonoBehaviour
     /// </summary>
     void OnDestroy()
     {
-        dotweenController?.Dispose();
+        // dotweenController?.Dispose();
         LogDebug("组件销毁，资源已清理");
     }
     
